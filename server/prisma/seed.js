@@ -10,7 +10,7 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const email = 'admin@showcase.local';
+  const email = 'bestktz12@gmail.com';
   const existingOwner = await prisma.owner.findUnique({ where: { email } });
 
   if (existingOwner) {
