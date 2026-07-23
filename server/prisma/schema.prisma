@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// Owner บัญชีเดียว — seed ครั้งเดียวตอน setup, ไม่มี register endpoint
+model Owner {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String   // bcrypt hash
+  name      String
+  bio       String?  @db.Text
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Project {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  summary     String
+  description String    @db.Text
+  coverImage  String
+  images      String[]
+  liveUrl     String?
+  repoUrl     String?
+  featured    Boolean   @default(false)
+  category    String
+  techStack   String[]
+  startedAt   DateTime
+  endedAt     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Skill {
+  id       String   @id @default(cuid())
+  name     String
+  category String   // e.g. Frontend, Backend, Tool
+  level    Int      // 1-5
+  icon     String?
+  order    Int      @default(0)
+}
+
+model Experience {
+  id          String    @id @default(cuid())
+  company     String
+  role        String
+  description String    @db.Text
+  startDate   DateTime
+  endDate     DateTime?
+  current     Boolean   @default(false)
+  location    String?
+}
