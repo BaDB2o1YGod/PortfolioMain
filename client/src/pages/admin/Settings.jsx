@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
+import { API_URL } from '../../lib/utils';
 
 export default function AdminSettings() {
   const [currentPassword, setCurrentPassword] = useState('');
@@ -17,7 +18,7 @@ export default function AdminSettings() {
 
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/password', {
+      const res = await fetch(`${API_URL}/api/auth/password`, {
         method: 'PUT',
         headers: { 
           'Content-Type': 'application/json',
