@@ -5,6 +5,7 @@ import { Mail, Globe } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
 import { API_URL } from '../lib/utils';
+import DottedMap from '../components/DottedMap';
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
@@ -30,35 +31,58 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-32">
       {/* Hero Section */}
-      <section className="flex flex-col items-start gap-6 max-w-3xl pt-12 md:pt-24">
-        <motion.h1 
-          className="text-5xl md:text-7xl font-serif text-text-primary"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+      <section className="flex flex-col md:flex-row items-center gap-6 pt-12 md:pt-24">
+        {/* Left side - Text */}
+        <div className="flex flex-col items-start gap-6 flex-1">
+          <motion.h1 
+            className="text-5xl md:text-7xl font-serif text-text-primary"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Anupong Karam
+          </motion.h1>
+          <motion.p 
+            className="text-xl text-text-muted max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
+            Portfolio showcasing my work in Web development.
+          </motion.p>
+          <motion.div 
+            className="flex gap-4 mt-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Button asChild size="lg">
+              <a href="#projects">View Projects</a>
+            </Button>
+            <Button variant="outline" size="lg" asChild>
+              <a href="#contact">Get in Touch</a>
+            </Button>
+          </motion.div>
+        </div>
+
+        {/* Right side - Dotted Map */}
+        <motion.div
+          className="flex-1 w-full md:w-auto"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          style={{ minHeight: '300px', maxHeight: '400px' }}
         >
-          Anupong Karam
-        </motion.h1>
-        <motion.p 
-          className="text-xl text-text-muted max-w-2xl"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          Portfolio showcasing my work in Web development.
-        </motion.p>
-        <motion.div 
-          className="flex gap-4 mt-4"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <Button asChild size="lg">
-            <a href="#projects">View Projects</a>
-          </Button>
-          <Button variant="outline" size="lg" asChild>
-            <a href="#contact">Get in Touch</a>
-          </Button>
+          <DottedMap
+            markers={[
+              {
+                lat: 15.87,
+                lng: 100.9925,
+                size: 3.5,
+                overlay: { countryCode: 'th', label: 'Thailand' },
+              },
+            ]}
+          />
         </motion.div>
       </section>
 
