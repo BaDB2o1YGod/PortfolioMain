@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '../../components/ui/Card';
 import { Button } from '../../components/ui/Button';
+import { API_URL } from '../../lib/utils';
 
 export default function AdminProjects() {
   const [projects, setProjects] = useState([]);
@@ -20,7 +21,7 @@ export default function AdminProjects() {
 
   const fetchProjects = async () => {
     try {
-      const res = await fetch('/api/projects');
+      const res = await fetch(`${API_URL}/api/projects`);
       if (res.ok) {
         const data = await res.json();
         setProjects(data);
@@ -55,7 +56,7 @@ export default function AdminProjects() {
         projectData.techStack = [];
       }
 
-      const url = editingId ? `/api/projects/${editingId}` : '/api/projects';
+      const url = editingId ? `${API_URL}/api/projects/${editingId}` : `${API_URL}/api/projects`;
       const method = editingId ? 'PUT' : 'POST';
 
       const res = await fetch(url, {
@@ -98,7 +99,7 @@ export default function AdminProjects() {
   const handleDelete = async (id) => {
     if (!confirm('Are you sure you want to delete this project?')) return;
     try {
-      const res = await fetch(`/api/projects/${id}`, { 
+      const res = await fetch(`${API_URL}/api/projects/${id}`, { 
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${sessionStorage.getItem('token')}` }
       });

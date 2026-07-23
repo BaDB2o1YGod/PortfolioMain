@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Mail, Globe } from 'lucide-react';
 import { Button } from '../components/ui/Button';
 import { Card, CardContent } from '../components/ui/Card';
+import { API_URL } from '../lib/utils';
 
 export default function Home() {
   const [projects, setProjects] = useState([]);
@@ -12,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await fetch('/api/projects');
+        const res = await fetch(`${API_URL}/api/projects`);
         if (res.ok) {
           const data = await res.json();
           setProjects(data);

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'lucide-react';
 import { Button } from '../components/ui/Button';
+import { API_URL } from '../lib/utils';
 
 export default function ProjectDetail() {
   const { slug } = useParams();
@@ -13,7 +14,7 @@ export default function ProjectDetail() {
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const res = await fetch(`/api/projects/${slug}`);
+        const res = await fetch(`${API_URL}/api/projects/${slug}`);
         if (res.ok) {
           const data = await res.json();
           setProject(data);
